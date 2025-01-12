@@ -1,0 +1,18 @@
+config.php
+moodledata/
+cache/
+localcache/
+sessions/
+temp/
+trashdir/
+
+# Исключение файлов IDE (phpStorm)
+.idea/
+*.iml
+
+# Исключение файлов логов и системных файлов
+*.log
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
