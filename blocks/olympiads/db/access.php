@@ -2,33 +2,31 @@
 defined('MOODLE_INTERNAL') || die();
 
 $capabilities = [
-    'block/olympiads:addinstance' => [
-        'riskbitmask' => RISK_SPAM | RISK_XSS,
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => [
-            'editingteacher' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
-        ],
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
-    ],
-
-    'block/olympiads:myaddinstance' => [
-        'riskbitmask' => RISK_SPAM | RISK_XSS,
-        'captype' => 'write',
-        'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => [
-            'user' => CAP_ALLOW
-        ],
-        'clonepermissionsfrom' => 'moodle/my:manageblocks'
-    ],
-
+    // Возможность управлять олимпиадами (создавать, редактировать, удалять)
     'block/olympiads:manage' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => [
-            'manager' => CAP_ALLOW,
-            'admin' => CAP_ALLOW
-        ]
-    ]
+        'archetypes' => [] // Для роли «Сотрудник приемной комиссии» настраивается вручную
+    ],
+
+    // Возможность просматривать список олимпиад
+    'block/olympiads:view' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [] // Для роли «Абитуриент» настраивается вручную
+    ],
+
+    // Возможность записываться на олимпиады
+    'block/olympiads:register' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [] // Для роли «Абитуриент» настраивается вручную
+    ],
+
+    // Возможность просматривать список записавшихся студентов
+    'block/olympiads:viewregistrations' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [] // Для роли «Сотрудник приемной комиссии» настраивается вручную
+    ],
 ];

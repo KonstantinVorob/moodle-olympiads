@@ -32,6 +32,14 @@ $olympiads = $DB->get_records('olympiads');
 
 // Выводим заголовок страницы
 echo $OUTPUT->header();
+
+// Кнопка для создания новой олипиады
+if (has_capability('block/olympiads:manage', context_system::instance())) {
+    $addurl = new moodle_url('/blocks/olympiads/add_edit.php');
+    echo html_writer::link($addurl, get_string('addolympiad', 'block_olympiads'), ['class' => 'btn btn-success mb-3']);
+}
+
+// Просто текст "Список всех олимпиад"
 echo $OUTPUT->heading(get_string('olympiadslist', 'block_olympiads'));
 
 // Проверяем, есть ли олимпиады

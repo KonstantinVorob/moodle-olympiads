@@ -28,3 +28,6 @@ $string['register'] = 'Записаться';
 $string['noavailableolympiads'] = 'Нет доступных олимпиад для записи';
 $string['description'] = 'Описание';
 $string['registrations'] = 'Записавшиеся';
+$string['viewolympiads'] = 'Просмотреть олимпиады';
+$string['manageolympiads'] = 'Управление олимпиадами';
+$string['addolympiad'] = 'Создать новую олимпиаду';
