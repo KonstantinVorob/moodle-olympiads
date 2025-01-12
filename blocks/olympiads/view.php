@@ -26,12 +26,14 @@ if ($olympiads) {
     foreach ($olympiads as $olympiad) {
         $editurl = new moodle_url('/blocks/olympiads/add_edit.php', ['id' => $olympiad->id]);
         $deleteurl = new moodle_url('/blocks/olympiads/delete.php', ['id' => $olympiad->id]);
+        $participantsurl = new moodle_url('/blocks/olympiads/participants.php', ['id' => $olympiad->id]);
         $table->data[] = [
             format_string($olympiad->name),
             userdate($olympiad->startdate),
             userdate($olympiad->enddate),
-            html_writer::link($editurl, get_string('edit'), ['class' => 'btn btn-primary']) . ' ' .
-            html_writer::link($deleteurl, get_string('delete'), ['class' => 'btn btn-danger'])
+            html_writer::link($editurl, get_string('edit', 'block_olympiads'), ['class' => 'btn btn-primary']) . ' ' .
+            html_writer::link($deleteurl, get_string('delete', 'block_olympiads'), ['class' => 'btn btn-danger']) . ' ' .
+            html_writer::link($participantsurl, get_string('viewparticipants', 'block_olympiads'), ['class' => 'btn btn-info'])
         ];
     }
     echo html_writer::table($table);
