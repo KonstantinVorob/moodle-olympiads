@@ -31,3 +31,5 @@ $string['registrations'] = 'Записавшиеся';
 $string['viewolympiads'] = 'Просмотреть олимпиады';
 $string['manageolympiads'] = 'Управление олимпиадами';
 $string['addolympiad'] = 'Создать новую олимпиаду';
+$string['savechanges'] = 'Сохранить изменения';
+$string['details'] = 'Страница для записи на олимпиаду';
