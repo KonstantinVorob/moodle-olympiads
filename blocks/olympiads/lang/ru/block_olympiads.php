@@ -12,3 +12,4 @@ $string['actions'] = 'Действия';
 $string['edit'] = 'Редактировать';
 $string['delete'] = 'Удалить';
 $string['noolympiads'] = 'Олимпиады отсутствуют';
+$string['recorddeleted'] = 'Олимпиада успешно удалена';
