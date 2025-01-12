@@ -26,3 +26,5 @@ $string['registrationdate'] = 'Дата записи';
 $string['availableolympiads'] = 'Доступные олимпиады';
 $string['register'] = 'Записаться';
 $string['noavailableolympiads'] = 'Нет доступных олимпиад для записи';
+$string['description'] = 'Описание';
+$string['registrations'] = 'Записавшиеся';

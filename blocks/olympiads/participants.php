@@ -41,7 +41,7 @@ if ($participants) {
         $table->data[] = [
             fullname($participant),
             $participant->email,
-            userdate($participant->timecreated)
+            date('d.m.Y',$participant->timecreated)
         ];
     }
     echo html_writer::table($table);
