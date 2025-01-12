@@ -11,6 +11,12 @@ class olympiad_form extends moodleform {
         $mform->setType('name', PARAM_NOTAGS);
         $mform->addRule('name', null, 'required', null, 'client');
 
+        // Поле для загрузки изображения
+        $mform->addElement('filepicker', 'image', get_string('image', 'block_olympiads'), null, [
+            'accepted_types' => ['.png', '.jpg', '.jpeg']
+        ]);
+        $mform->addRule('image', null, 'optional', null, 'client');
+
         // Поля для ввода дат
         $mform->addElement('date_selector', 'startdate', get_string('startdate', 'block_olympiads'));
         $mform->addElement('date_selector', 'enddate', get_string('enddate', 'block_olympiads'));

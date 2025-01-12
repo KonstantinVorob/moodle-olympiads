@@ -23,3 +23,6 @@ $string['participantslist'] = 'Список участников';
 $string['viewparticipants'] = 'Просмотреть участников';
 $string['noparticipants'] = 'На эту олимпиаду еще никто не записался';
 $string['registrationdate'] = 'Дата записи';
+$string['availableolympiads'] = 'Доступные олимпиады';
+$string['register'] = 'Записаться';
+$string['noavailableolympiads'] = 'Нет доступных олимпиад для записи';

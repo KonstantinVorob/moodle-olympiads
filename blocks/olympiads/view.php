@@ -1,10 +1,12 @@
 <?php
 require_once('../../config.php');
+require_once('lib.php');
 
 $context = context_system::instance();
 
 require_login();
 require_capability('block/olympiads:manage', $context);
+block_olympiads_specialization();
 
 $PAGE->set_url(new moodle_url('/blocks/olympiads/view.php'));
 $PAGE->set_context($context);
@@ -27,12 +29,16 @@ if ($olympiads) {
         $editurl = new moodle_url('/blocks/olympiads/add_edit.php', ['id' => $olympiad->id]);
         $deleteurl = new moodle_url('/blocks/olympiads/delete.php', ['id' => $olympiad->id]);
         $participantsurl = new moodle_url('/blocks/olympiads/participants.php', ['id' => $olympiad->id]);
+
+        $pencilsvg = html_writer::empty_tag('img', ['src' => new moodle_url('/blocks/olympiads/bootstrap/icons/pencil.svg'), 'alt' => get_string('edit', 'block_olympiads'), 'width' => 16, 'height' => 16]);
+        $trashsvg = html_writer::empty_tag('img', ['src' => new moodle_url('/blocks/olympiads/bootstrap/icons/trash.svg'), 'alt' => get_string('delete', 'block_olympiads'), 'width' => 16, 'height' => 16]);
+
         $table->data[] = [
             format_string($olympiad->name),
             userdate($olympiad->startdate),
             userdate($olympiad->enddate),
-            html_writer::link($editurl, get_string('edit', 'block_olympiads'), ['class' => 'btn btn-primary']) . ' ' .
-            html_writer::link($deleteurl, get_string('delete', 'block_olympiads'), ['class' => 'btn btn-danger']) . ' ' .
+            html_writer::link($editurl, $pencilsvg, ['class' => 'btn', 'title' => get_string('edit', 'block_olympiads')]) . ' ' .
+            html_writer::link($deleteurl, $trashsvg, ['class' => 'btn', 'title' => get_string('delete', 'block_olympiads')]) . ' ' .
             html_writer::link($participantsurl, get_string('viewparticipants', 'block_olympiads'), ['class' => 'btn btn-info'])
         ];
     }

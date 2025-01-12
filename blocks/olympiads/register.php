@@ -1,5 +1,8 @@
 <?php
 require_once('../../config.php');
+require_once('lib.php');
+
+block_olympiads_specialization();
 
 $id = required_param('id', PARAM_INT); // ID олимпиады для записи
 $context = context_system::instance();

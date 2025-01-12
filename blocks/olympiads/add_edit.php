@@ -1,7 +1,9 @@
 <?php
 require_once('../../config.php');
-//require_once('lib.php');
 require_once('form/olympiad_form.php');
+require_once('lib.php');
+
+block_olympiads_specialization();
 
 $id = optional_param('id', 0, PARAM_INT); // ID олимпиады (0 — новая запись)
 $context = context_system::instance();
@@ -17,6 +19,15 @@ $PAGE->set_heading($SITE->fullname);
 // Загрузка существующей записи, если указано ID
 if ($id) {
     $olympiad = $DB->get_record('olympiads', ['id' => $id], '*', MUST_EXIST);
+
+    // Подготовка файла изображения для редактирования
+    $draftitemid = file_get_submitted_draft_itemid('image');
+    file_prepare_draft_area($draftitemid, $context->id, 'block_olympiads', 'image', $id, [
+        'subdirs' => false,
+        'maxfiles' => 1,
+        'accepted_types' => ['.png', '.jpg', '.jpeg']
+    ]);
+    $olympiad->image = $draftitemid;
 } else {
     $olympiad = null;
 }
@@ -28,7 +39,8 @@ if ($form->is_cancelled()) {
 } else if ($data = $form->get_data()) {
     unset($data->submitbutton);
 
-//    var_dump($data);die();
+    $draftitemid = file_get_submitted_draft_itemid('image');
+
     if ($id) {
         $data->id = $id;
         $data->timemodified = time();
@@ -37,8 +49,16 @@ if ($form->is_cancelled()) {
         $data->timecreated = time();
         $data->timemodified = time();
         $data->createdby = $USER->id;
-        $DB->insert_record('olympiads', $data);
+        $data->id = $DB->insert_record('olympiads', $data);
     }
+
+    // Сохранение файла изображения в файловой системе Moodle
+    file_save_draft_area_files($draftitemid, $context->id, 'block_olympiads', 'image', $data->id, [
+        'subdirs' => false,
+        'maxfiles' => 1,
+        'accepted_types' => ['.png', '.jpg', '.jpeg']
+    ]);
+
     redirect(new moodle_url('/blocks/olympiads/view.php'), get_string('changessaved', 'block_olympiads'));
 }
 
