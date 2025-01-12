@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMLDB PATH="blocks/olympiads/db" VERSION="2025011100" COMMENT="XMLDB file for Olympiads block plugin">
+    <TABLES>
+        <TABLE NAME="olympiads" COMMENT="Table for storing olympiads">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Primary key"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" COMMENT="Olympiad name"/>
+                <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Start date (timestamp)"/>
+                <FIELD NAME="enddate" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="End date (timestamp)"/>
+                <FIELD NAME="createdby" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Creator user ID"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Last modification time"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+
+        <TABLE NAME="olympiads_participants" COMMENT="Table for storing olympiad participants">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Primary key"/>
+                <FIELD NAME="olympiadid" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Foreign key to olympiads"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="User ID (participant)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="Time of creation"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="fk_olympiad" TYPE="foreign" FIELDS="olympiadid" REFERENCES="olympiads(id)"/>
+                <KEY NAME="fk_user" TYPE="foreign" FIELDS="userid" REFERENCES="user(id)"/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>

@@ -21,5 +21,14 @@ $capabilities = [
             'user' => CAP_ALLOW
         ],
         'clonepermissionsfrom' => 'moodle/my:manageblocks'
+    ],
+
+    'block/olympiads:manage' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+            'admin' => CAP_ALLOW
+        ]
     ]
 ];
