@@ -20,6 +20,9 @@ $PAGE->set_heading($SITE->fullname);
 if ($id) {
     $olympiad = $DB->get_record('olympiads', ['id' => $id], '*', MUST_EXIST);
 
+    // Подготовка описания для редактора
+    $olympiad->description = ['text' => $olympiad->description, 'format' => FORMAT_HTML];
+
     // Подготовка файла изображения для редактирования
     $draftitemid = file_get_submitted_draft_itemid('image');
     file_prepare_draft_area($draftitemid, $context->id, 'block_olympiads', 'image', $id, [
@@ -40,14 +43,13 @@ if ($form->is_cancelled()) {
     unset($data->submitbutton);
 
     $draftitemid = file_get_submitted_draft_itemid('image');
+    $data->description = strip_tags($data->description['text']);
+    $data->timemodified = time();
 
-    if ($id) {
-        $data->id = $id;
-        $data->timemodified = time();
+    if (!empty($data->id)) {
         $DB->update_record('olympiads', $data);
     } else {
         $data->timecreated = time();
-        $data->timemodified = time();
         $data->createdby = $USER->id;
         $data->id = $DB->insert_record('olympiads', $data);
     }

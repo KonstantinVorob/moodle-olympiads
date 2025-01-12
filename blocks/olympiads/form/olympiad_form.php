@@ -6,10 +6,19 @@ class olympiad_form extends moodleform {
         $mform = $this->_form;
         $olympiad = $this->_customdata['olympiad'];
 
+        // Скрытое поле для редактирования
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
+
         // Поле для ввода названия олимпиады
         $mform->addElement('text', 'name', get_string('name', 'block_olympiads'));
         $mform->setType('name', PARAM_NOTAGS);
         $mform->addRule('name', null, 'required', null, 'client');
+
+        // Поле для описания олимпиады
+        $mform->addElement('editor', 'description', get_string('description', 'block_olympiads'), null, ['maxfiles' => 0]);
+        $mform->setType('description', PARAM_RAW);
+        $mform->addRule('description', get_string('required'), 'required', null, 'client');
 
         // Поле для загрузки изображения
         $mform->addElement('filepicker', 'image', get_string('image', 'block_olympiads'), null, [

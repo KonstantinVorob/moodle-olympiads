@@ -24,7 +24,7 @@ echo $OUTPUT->heading(get_string('olympiadslist', 'block_olympiads'));
 // Проверяем, есть ли олимпиады
 if ($olympiads) {
     $table = new html_table();
-    $table->head = [get_string('name', 'block_olympiads'), get_string('startdate', 'block_olympiads'), get_string('enddate', 'block_olympiads'), get_string('actions', 'block_olympiads')];
+    $table->head = [get_string('name', 'block_olympiads'), get_string('startdate', 'block_olympiads'), get_string('enddate', 'block_olympiads'), get_string('description', 'block_olympiads'), get_string('actions', 'block_olympiads')];
     foreach ($olympiads as $olympiad) {
         $editurl = new moodle_url('/blocks/olympiads/add_edit.php', ['id' => $olympiad->id]);
         $deleteurl = new moodle_url('/blocks/olympiads/delete.php', ['id' => $olympiad->id]);
@@ -35,8 +35,9 @@ if ($olympiads) {
 
         $table->data[] = [
             format_string($olympiad->name),
-            userdate($olympiad->startdate),
-            userdate($olympiad->enddate),
+            date('d.m.Y',$olympiad->startdate),
+            date('d.m.Y',$olympiad->enddate),
+            shorten_text(format_text($olympiad->description, FORMAT_HTML), 100),
             html_writer::link($editurl, $pencilsvg, ['class' => 'btn', 'title' => get_string('edit', 'block_olympiads')]) . ' ' .
             html_writer::link($deleteurl, $trashsvg, ['class' => 'btn', 'title' => get_string('delete', 'block_olympiads')]) . ' ' .
             html_writer::link($participantsurl, get_string('viewparticipants', 'block_olympiads'), ['class' => 'btn btn-info'])
